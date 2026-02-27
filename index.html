@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Catalisador — Conceito e Visão do Projeto</title>
+    <meta name="description"
+        content="Apresentação completa do conceito e visão do projeto O Catalisador — Ecossistema de Mentoria e Consultoria Estratégica para CEOs.">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #05070a;
+            --bg-card: rgba(10, 20, 35, 0.85);
+            --accent-gold: #c5a059;
+            --accent-gold-dim: rgba(197, 160, 89, 0.15);
+            --accent-blue: #0f1c2e;
+            --accent-green: #00e800;
+            --accent-teal: #1a8a7a;
+            --text-main: #e8e8e8;
+            --text-secondary: #9a9faa;
+            --text-gold: #e2c882;
+            --border-subtle: rgba(197, 160, 89, 0.12);
+            --border-gold: rgba(197, 160, 89, 0.35);
+            --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --ease: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            background: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 20px;
+            background: rgba(5, 7, 10, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-subtle);
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 30px;
+            transition: all 0.3s var(--ease);
+            border: 1px solid transparent;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--accent-gold);
+            border-color: var(--border-gold);
+            background: var(--accent-gold-dim);
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(15, 28, 46, 0.9) 0%, var(--bg-deep) 70%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('https://www.transparenttextures.com/patterns/cubes.png');
+            opacity: 0.04;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 6px 24px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--bg-deep);
+            background: linear-gradient(135deg, var(--accent-gold), #e2c882);
+            box-shadow: 0 4px 20px rgba(197, 160, 89, 0.3);
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+            animation: fadeInDown 1s var(--ease) forwards;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            font-weight: 900;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent-gold) 60%, #e2c882 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s 0.2s var(--ease) both;
+        }
+
+        .hero-sub {
+            font-size: clamp(0.85rem, 1.4vw, 1.1rem);
+            color: var(--text-secondary);
+            margin-top: 20px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s 0.5s var(--ease) both;
+        }
+
+        .hero-tagline {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+            color: var(--text-gold);
+            margin-top: 30px;
+            max-width: 650px;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s 0.8s var(--ease) both;
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 40px;
+            border: 2px solid var(--border-gold);
+            border-radius: 12px;
+            z-index: 1;
+        }
+
+        .hero-scroll::after {
+            content: '';
+            width: 4px;
+            height: 8px;
+            background: var(--accent-gold);
+            border-radius: 2px;
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: scrollDot 2s infinite;
+        }
+
+        .section {
+            padding: 100px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.65rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            color: #fff;
+            margin-bottom: 20px;
+            line-height: 1.15;
+        }
+
+        .section-desc {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            max-width: 700px;
+            margin-bottom: 50px;
+        }
+
+        .divider {
+            width: 60px;
+            height: 2px;
+            margin: 80px auto;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 36px;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.4s var(--ease);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: var(--border-gold);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-icon {
+            font-size: 2.2rem;
+            margin-bottom: 18px;
+        }
+
+        .card h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--accent-gold);
+            font-size: 1.35rem;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 14px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--accent-gold), transparent);
+        }
+
+        .tl-item {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .tl-item::before {
+            content: '';
+            position: absolute;
+            left: -33px;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent-gold);
+            border: 3px solid var(--bg-deep);
+            box-shadow: 0 0 12px rgba(197, 160, 89, 0.4);
+        }
+
+        .tl-item h4 {
+            color: var(--accent-gold);
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .tl-item p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .price-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 36px 28px;
+            border: 1px solid var(--border-subtle);
+            text-align: center;
+            transition: all 0.4s var(--ease);
+            position: relative;
+        }
+
+        .price-card.featured {
+            border-color: var(--accent-gold);
+        }
+
+        .price-card.featured::before {
+            content: 'DESTAQUE';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--accent-gold), #e2c882);
+            color: var(--bg-deep);
+            font-size: 0.6rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            padding: 4px 18px;
+            border-radius: 20px;
+        }
+
+        .price-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .price-label {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .price-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 14px;
+        }
+
+        .price-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--accent-gold);
+            margin-bottom: 6px;
+        }
+
+        .price-desc {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+        }
+
+        .price-features {
+            list-style: none;
+            text-align: left;
+        }
+
+        .price-features li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .price-features li::before {
+            content: '✦ ';
+            color: var(--accent-gold);
+        }
+
+        .team-card {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .team-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, var(--accent-blue), rgba(197, 160, 89, 0.15));
+            border: 2px solid var(--border-gold);
+        }
+
+        .team-card h4 {
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+
+        .team-card .role {
+            color: var(--accent-gold);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .quote-block {
+            text-align: center;
+            padding: 60px 40px;
+            background: linear-gradient(135deg, rgba(197, 160, 89, 0.06) 0%, transparent 100%);
+            border-radius: 20px;
+            border: 1px solid var(--border-subtle);
+            margin: 60px 0;
+        }
+
+        .quote-block blockquote {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+            color: var(--text-gold);
+            line-height: 1.5;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+
+        .quote-block cite {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-style: normal;
+        }
+
+        .journey-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.3s var(--ease);
+            margin-bottom: 16px;
+        }
+
+        .journey-step:hover {
+            border-color: var(--border-gold);
+            background: var(--accent-gold-dim);
+        }
+
+        .journey-num {
+            min-width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.9rem;
+            color: var(--bg-deep);
+            background: linear-gradient(135deg, var(--accent-gold), #e2c882);
+            flex-shrink: 0;
+        }
+
+        .journey-step h4 {
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+
+        .journey-step p {
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            border-top: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        footer a {
+            color: var(--accent-gold);
+            text-decoration: none;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin: 40px 0;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 24px;
+        }
+
+        .stat-value {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: var(--accent-gold);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 8px;
+        }
+
+        .alert-box {
+            background: rgba(255, 152, 0, 0.08);
+            border: 1px solid rgba(255, 152, 0, 0.3);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin: 30px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .alert-box .alert-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .alert-box p {
+            color: #e0c080;
+            font-size: 0.9rem;
+        }
+
+        .element-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.4s var(--ease);
+        }
+
+        .element-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--border-gold);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .element-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+
+        .element-card h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--accent-gold);
+            font-size: 1.4rem;
+            margin-bottom: 6px;
+        }
+
+        .element-card .element-sub {
+            color: var(--text-gold);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 14px;
+        }
+
+        .element-card p {
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scrollDot {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+
+            50% {
+                opacity: 0.3;
+                transform: translateX(-50%) translateY(16px);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.7s var(--ease);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 900px) {
+
+            .grid-2,
+            .grid-3,
+            .grid-4,
+            .stat-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 60px 5%;
+            }
+
+            nav {
+                gap: 4px;
+            }
+
+            nav a {
+                font-size: 0.6rem;
+                padding: 5px 8px;
+                letter-spacing: 1.5px;
+            }
+        }
+
+        @media (min-width: 901px) and (max-width: 1100px) {
+            .grid-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .grid-4,
+            .stat-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="#home">Início</a>
+        <a href="#blueprint">Blueprint</a>
+        <a href="#elementos">4 Elementos</a>
+        <a href="#conceito">Conceito</a>
+        <a href="#jornada">Jornada</a>
+        <a href="#produtos">Produtos</a>
+        <a href="#cupula">Cúpula CEO</a>
+        <a href="#equipe">Equipe</a>
+        <a href="#cronograma">Cronograma</a>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="home">
+        <div class="hero-badge">O Blueprint da Aceleração</div>
+        <h1>O Catalisador</h1>
+        <div class="hero-sub">Projeto Ibrahim Boufleur & Live Consultoria</div>
+        <p class="hero-tagline">"O CEO comum gerencia processos. O CEO Catalisador acelera reações sem se consumir no
+            processo."</p>
+        <div class="hero-scroll"></div>
+    </section>
+
+    <!-- ===== BLUEPRINT ORIGINAL ===== -->
+    <div class="section" id="blueprint">
+        <div class="grid-2 fade-in">
+            <div>
+                <div class="section-label">O Blueprint Original</div>
+                <h2 class="section-title">O Manifesto: A Química da Aceleração</h2>
+                <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 20px;">
+                    O projeto nasceu de uma visão: transformar o empresário operacional em um <strong
+                        style="color: var(--accent-gold);">CEO Catalisador</strong> — aquele que acelera as reações da
+                    empresa sem se consumir no processo.
+                </p>
+                <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 20px;">
+                    Inspirado na filosofia do <strong style="color: var(--accent-gold);">"Padeiro Sacerdotal"</strong>
+                    de Luiz Gonzaga de Carvalho — onde não há separação entre o sagrado e o profano — o CEO é visto como
+                    aquele que transforma elementos brutos em algo nutritivo e elevado, através da disciplina e do
+                    propósito.
+                </p>
+                <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                    O Blueprint define a arquitetura completa do ecossistema: da porta de entrada (imersão presencial)
+                    até o topo (mentoria de elite com equity e exit strategy).
+                </p>
+            </div>
+            <div>
+                <div class="quote-block" style="margin: 0;">
+                    <blockquote>"Na química, o catalisador é a substância que acelera uma reação sem ser consumido por
+                        ela. Na liderança, é o CEO que transforma a empresa sem se destruir no processo."</blockquote>
+                    <cite>— Ibrahim Boufleur, O Blueprint do Catalisador</cite>
+                </div>
+            </div>
+        </div>
+
+        <div class="alert-box fade-in" style="margin-top: 40px;">
+            <div class="alert-icon">⚠️</div>
+            <div>
+                <p><strong>Naming em definição:</strong> O nome definitivo da marca ainda está em processo de aprovação.
+                    Candidatos como <em>ViDi</em> (Latim: "Eu vi", de "Veni, Vidi, Vici"), <em>Tótem</em> e outras
+                    opções estão sendo avaliados quanto à viabilidade de registro no INPI nas classes 35 (Consultoria) e
+                    41 (Educação). O nome "ViDi" foi aprovado internamente por unanimidade, mas a validação formal no
+                    INPI segue pendente.</p>
+            </div>
+        </div>
+
+        <div class="stat-grid fade-in" style="margin-top: 40px;">
+            <div class="stat">
+                <div class="stat-value">2</div>
+                <div class="stat-label">Mentores Fundadores</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">250+</div>
+                <div class="stat-label">CEOs Esperados</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">R$ 300k</div>
+                <div class="stat-label">Investimento MVP</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">Mai/26</div>
+                <div class="stat-label">Evento Inaugural</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ===== 4 ELEMENTOS ===== -->
+    <div class="section" id="elementos">
+        <div class="section-label fade-in">A Metodologia Proprietária</div>
+        <h2 class="section-title fade-in">Os 4 Elementos da Transformação</h2>
+        <p class="section-desc fade-in">A transformação do líder operacional em CEO Catalisador segue quatro estágios
+            simbólicos — dos fundamentos à consagração.</p>
+        <div class="grid-4 fade-in">
+            <div class="element-card">
+                <div class="element-icon">🌍</div>
+                <h3>Terra</h3>
+                <div class="element-sub">Mentalidade</div>
+                <p>A "moagem" do ego. Adoção da mentalidade de dono, quebra de crenças limitantes e fortalecimento da
+                    base do líder.</p>
+            </div>
+            <div class="element-card">
+                <div class="element-icon">💧</div>
+                <h3>Água</h3>
+                <div class="element-sub">Governança</div>
+                <p>Coesão e fluidez. Acordos de sócios, estruturação jurídica, planejamento financeiro e arquitetura
+                    organizacional.</p>
+            </div>
+            <div class="element-card">
+                <div class="element-icon">💨</div>
+                <h3>Ar</h3>
+                <div class="element-sub">Processos</div>
+                <p>Disciplina dos rituais de gestão. KPIs, OKRs, "Playbook Operacional" e sistemas de acompanhamento.
+                </p>
+            </div>
+            <div class="element-card">
+                <div class="element-icon">🔥</div>
+                <h3>Fogo</h3>
+                <div class="element-sub">Liderança</div>
+                <p>A consagração. O líder antifrágil que prospera no caos, domina a adversidade e inspira transformação
+                    em cascata.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ===== CONCEITO ===== -->
+    <div class="section" id="conceito">
+        <div class="grid-2 fade-in">
+            <div>
+                <div class="section-label">O Ecossistema</div>
+                <h2 class="section-title">Visão do Projeto</h2>
+                <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 20px;">
+                    O projeto é um ecossistema de mentoria, consultoria e formação estratégica para CEOs e líderes
+                    empresariais, fundado por <strong>Ibrahim Boufleur</strong> e <strong>Luiz Portal</strong> em
+                    Goiânia.
+                </p>
+                <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 20px;">
+                    O universo simbólico romano permeia a identidade: o <strong
+                        style="color: var(--accent-gold);">Panteão</strong>, a <strong
+                        style="color: var(--accent-gold);">Cúpula</strong>, o <strong
+                        style="color: var(--accent-gold);">Conselho</strong>. Cada elemento remete a governo, autoridade
+                    e sabedoria. O candidato principal ao nome — <em>ViDi</em> — vem do Latim "Veni,
+                    <strong>Vidi</strong>, Vici" (Vim, Vi, Venci), representando <strong>clareza</strong> e
+                    <strong>diagnóstico preciso</strong>.
+                </p>
+                <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                    O slogan proposto: <strong style="color: var(--text-gold);">"Chegue. Enxergue. Conquiste."</strong>
+                    — traduz a essência da jornada para o português com impacto e memória.
+                </p>
+            </div>
+            <div style="text-align: center;">
+                <img src="../Brand_Reveal/vidi_logo.png" alt="Logo Conceito"
+                    style="max-width: 300px; width: 100%; border-radius: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.5); border: 1px solid var(--border-gold); margin-bottom: 16px;">
+                <p style="color: var(--text-secondary); font-size: 0.8rem; font-style: italic;">Conceito visual em
+                    exploração — nome em definição no INPI</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ===== PILARES ===== -->
+    <div class="section">
+        <div class="section-label fade-in">Fundamentos</div>
+        <h2 class="section-title fade-in">Pilares Estratégicos</h2>
+        <p class="section-desc fade-in">Do diagnóstico à vitória — a tríade que sustenta o ecossistema.</p>
+        <div class="grid-3 fade-in">
+            <div class="card">
+                <div class="card-icon">🔍</div>
+                <h3>Diagnóstico</h3>
+                <p>Enxergar o invisível. Com IA e metodologia proprietária, realizamos um raio-X completo do negócio. O
+                    evento utiliza IA para processar áudios dos participantes e gerar diagnósticos personalizados.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🏛️</div>
+                <h3>Autoridade</h3>
+                <p>Governar com sabedoria. Formar líderes que comandam pelo exemplo. Do "Padeiro Sacerdotal" à Liderança
+                    Antifrágil — transformar elementos brutos em excelência.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🏆</div>
+                <h3>Vitória</h3>
+                <p>O resultado inevitável de uma liderança preparada. Do conselho à mesa de equity e exit strategy — o
+                    caminho para construir um legado empresarial duradouro.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ===== JORNADA DO CLIENTE ===== -->
+    <div class="section" id="jornada">
+        <div class="section-label fade-in">A Jornada do Herói</div>
+        <h2 class="section-title fade-in">Jornada do Cliente</h2>
+        <p class="section-desc fade-in">Inspirada no arquétipo universal da Jornada do Herói, a experiência transforma
+            CEOs através de fases deliberadas — do mundo comum ao legado.</p>
+        <div class="grid-2 fade-in">
+            <div>
+                <div class="journey-step">
+                    <div class="journey-num">1</div>
+                    <div>
+                        <h4>Mundo Comum</h4>
+                        <p>O CEO no status quo — enfrentando desafios invisíveis. A empresa cresce, mas algo impede o
+                            salto.</p>
+                    </div>
+                </div>
+                <div class="journey-step">
+                    <div class="journey-num">2</div>
+                    <div>
+                        <h4>Chamado & Recusa</h4>
+                        <p>Lives de aquecimento, Google Ads regionais e conteúdo fazem o chamado. A resistência é
+                            natural — medo de mudar.</p>
+                    </div>
+                </div>
+                <div class="journey-step">
+                    <div class="journey-num">3</div>
+                    <div>
+                        <h4>Encontro com o Mentor</h4>
+                        <p>O CEO descobre Ibrahim e Luiz Portal. Marketing de transparência e bastidores criam confiança
+                            e autoridade.</p>
+                    </div>
+                </div>
+                <div class="journey-step">
+                    <div class="journey-num">4</div>
+                    <div>
+                        <h4>Primeiro Limiar — O Evento</h4>
+                        <p>A <strong>Cúpula CEO</strong> (ou The Catalyst Experience) é o ponto de virada. Imersão com
+                            "espetáculo narrativo", diagnósticos com IA e mesas redondas com CEOs reais.</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="journey-step">
+                    <div class="journey-num">5</div>
+                    <div>
+                        <h4>Aproximação da Caverna</h4>
+                        <p>Aplicação da metodologia dos 4 Elementos: Terra → Água → Ar → Fogo. Consultoria e mentoria
+                            focada.</p>
+                    </div>
+                </div>
+                <div class="journey-step">
+                    <div class="journey-num">6</div>
+                    <div>
+                        <h4>Provação</h4>
+                        <p>"Isso não vai dar certo!" — fase mais delicada. Resistência interna, mudança cultural,
+                            implementação. O mentor acompanha via Bot Alex (IA).</p>
+                    </div>
+                </div>
+                <div class="journey-step">
+                    <div class="journey-num">7</div>
+                    <div>
+                        <h4>Recompensa</h4>
+                        <p>Resultados concretos. Lucro, clareza, equipe alinhada. O diagnóstico se comprova, o líder
+                            antifrágil emerge.</p>
+                    </div>
+                </div>
+                <div class="journey-step">
+                    <div class="journey-num">8</div>
+                    <div>
+                        <h4>Cadeira no Conselho</h4>
+                        <p>O CEO evolui ao topo. Equity, exit strategy, conselho consultivo — o legado está construído.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ===== PRODUTOS ===== -->
+    <div class="section" id="produtos">
+        <div class="section-label fade-in">Ecossistema de Produtos</div>
+        <h2 class="section-title fade-in">Stack de Produtos</h2>
+        <p class="section-desc fade-in">Arquitetura completa — da porta de entrada ao conselho executivo.</p>
+
+        <h3
+            style="font-family: 'Playfair Display', serif; color: var(--accent-gold); font-size: 1.5rem; margin: 40px 0 20px;">
+            Porta de Entrada — Cúpula CEO (Evento)</h3>
+        <div class="grid-3 fade-in">
+            <div class="price-card">
+                <div class="price-label">Lote 1</div>
+                <div class="price-name">Early Bird</div>
+                <div class="price-value">R$ 1.197</div>
+                <p class="price-desc">Limitado aos 50 primeiros</p>
+                <ul class="price-features">
+                    <li>Acesso completo (2 dias)</li>
+                    <li>Networking com CEOs regionais</li>
+                    <li>Kit do participante</li>
+                    <li>Certificado de participação</li>
+                </ul>
+            </div>
+            <div class="price-card featured">
+                <div class="price-label">Padrão</div>
+                <div class="price-name">Standard</div>
+                <div class="price-value">R$ 1.497</div>
+                <p class="price-desc">Ingresso principal</p>
+                <ul class="price-features">
+                    <li>Acesso completo (2 dias)</li>
+                    <li>Mesas redondas com CEOs</li>
+                    <li>Kit do participante</li>
+                    <li><strong>Sócio:</strong> 50% off no 2º ingresso</li>
+                </ul>
+            </div>
+            <div class="price-card">
+                <div class="price-label">Recuperação</div>
+                <div class="price-name">Virtual Pass</div>
+                <div class="price-value">R$ 997</div>
+                <p class="price-desc">Downsell — online</p>
+                <ul class="price-features">
+                    <li>Acesso online ao vivo</li>
+                    <li>Gravações completas</li>
+                    <li>Bônus: curso completo</li>
+                </ul>
+            </div>
+        </div>
+
+        <h3
+            style="font-family: 'Playfair Display', serif; color: var(--accent-gold); font-size: 1.5rem; margin: 60px 0 20px;">
+            Upsells Estratégicos</h3>
+        <div class="grid-4 fade-in">
+            <div class="card" style="padding: 28px;">
+                <div class="card-icon">⭐</div>
+                <h3 style="font-size: 1.1rem;">VIP Pass</h3>
+                <div style="color: var(--accent-gold); font-size: 1.4rem; font-weight: 800; margin-bottom: 10px;">+R$
+                    997</div>
+                <p>Áreas exclusivas, coffee break e almoço com palestrantes e CEOs.</p>
+            </div>
+            <div class="card" style="padding: 28px;">
+                <div class="card-icon">🍷</div>
+                <h3 style="font-size: 1.1rem;">Upgrade Cúpula</h3>
+                <div style="color: var(--accent-gold); font-size: 1.4rem; font-weight: 800; margin-bottom: 10px;">+R$
+                    7.997</div>
+                <p>VIP Pass + jantar exclusivo com a cúpula e CEOs convidados.</p>
+            </div>
+            <div class="card" style="padding: 28px;">
+                <div class="card-icon">🤖</div>
+                <h3 style="font-size: 1.1rem;">Diagnóstico Catalyst</h3>
+                <div style="color: var(--accent-gold); font-size: 1.4rem; font-weight: 800; margin-bottom: 10px;">R$ 297
+                </div>
+                <p>Pré-diagnóstico empresarial com IA. Análise ao vivo no palco pelos CEOs.</p>
+            </div>
+            <div class="card" style="padding: 28px;">
+                <div class="card-icon">📖</div>
+                <h3 style="font-size: 1.1rem;">Publicações</h3>
+                <div style="color: var(--accent-gold); font-size: 1.4rem; font-weight: 800; margin-bottom: 10px;">📚
+                </div>
+                <p>"O Catalisador do CEO" (ebook) e "A Jornada do Padeiro" (livro físico).</p>
+            </div>
+        </div>
+
+        <h3
+            style="font-family: 'Playfair Display', serif; color: var(--accent-gold); font-size: 1.5rem; margin: 60px 0 20px;">
+            Mentorias & Consultoria</h3>
+        <div class="grid-3 fade-in">
+            <div class="card">
+                <div class="card-icon">🛡️</div>
+                <h3>Liderança Antifrágil</h3>
+                <div style="color: var(--accent-gold); font-size: 1.6rem; font-weight: 800; margin-bottom: 10px;">R$
+                    39.997</div>
+                <p><strong>Mentor: Luiz Portal.</strong> Cultura de alta performance, formação de líderes resilientes e
+                    transformação organizacional.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">💎</div>
+                <h3>Mentoria Líder Rentável</h3>
+                <div style="color: var(--accent-gold); font-size: 1.6rem; font-weight: 800; margin-bottom: 10px;">R$
+                    100.000</div>
+                <p><strong>Mentor: Ibrahim Boufleur.</strong> 14 semanas, 15 módulos — de governança e marketing até M&A
+                    e exit strategy. O programa The Catalyst.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🎯</div>
+                <h3>Consultoria Customizada</h3>
+                <div style="color: var(--accent-gold); font-size: 1.6rem; font-weight: 800; margin-bottom: 10px;">Sob
+                    consulta</div>
+                <p>Híbrida com entregas técnicas e diagnósticos setoriais. Baseada na metodologia do Desafio
+                    Empreendedor.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ===== CÚPULA CEO ===== -->
+    <div class="section" id="cupula">
+        <div class="grid-2 fade-in">
+            <div>
+                <div class="section-label">Evento Principal</div>
+                <h2 class="section-title">Cúpula CEO — The Catalyst Experience</h2>
+                <p style="color: var(--text-secondary); font-size: 1rem; margin-bottom: 24px;">O evento inaugural não é
+                    uma palestra — é um <strong style="color: var(--text-gold);">"espetáculo narrativo"</strong> com
+                    visual de laboratório e interação sensorial. Formatado como imersão presencial de 2 dias.</p>
+                <div class="timeline">
+                    <div class="tl-item">
+                        <h4>📅 Data</h4>
+                        <p>28–29 de Maio de 2026 (2 dias)</p>
+                    </div>
+                    <div class="tl-item">
+                        <h4>📍 Local</h4>
+                        <p>WTC (World Trade Center) Goiânia — em avaliação final</p>
+                    </div>
+                    <div class="tl-item">
+                        <h4>👥 Formato</h4>
+                        <p>~10 CEOs raiz em mesas redondas + painéis de debate + experiências VIP</p>
+                    </div>
+                    <div class="tl-item">
+                        <h4>🤖 IA no Evento</h4>
+                        <p>Áudios dos participantes coletados via QR Code, processados por IA e devolvidos como
+                            diagnósticos personalizados</p>
+                    </div>
+                    <div class="tl-item">
+                        <h4>🎮 Gamificação</h4>
+                        <p>Ranking de engajamento com prêmios: cursos, livros autografados, diagnóstico completo pelo
+                            time Catalyst</p>
+                    </div>
+                    <div class="tl-item">
+                        <h4>🤝 Patrocínios</h4>
+                        <p>Ótica San Pietro (óculos artesanais personalizados), Muy Café, parceiros de A&B</p>
+                    </div>
+                    <div class="tl-item">
+                        <h4>💰 Orçamento</h4>
+                        <p>Conservador: R$ 260k | Ousado (com vendas): R$ 500k</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <img src="../Brand_Reveal/cupula_corp.png" alt="Cúpula CEO"
+                    style="width: 100%; border-radius: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.5); border: 1px solid var(--border-gold); margin-bottom: 30px;">
+                <div class="card" style="background: rgba(197, 160, 89, 0.06);">
+                    <h3>A Experiência — 2 Dias</h3>
+                    <ul class="price-features">
+                        <li><strong>Dia 1:</strong> Jantar/Experiência VIP + Networking + Mesa Redonda</li>
+                        <li><strong>Dia 2:</strong> Conteúdo denso + Palestrantes + Diagnósticos IA</li>
+                        <li>Agente IA para Q&A e interação dinâmica</li>
+                        <li>App de votação e sorteios em tempo real</li>
+                        <li>Restaurantes homologados pelo evento</li>
+                        <li>Marketing de transparência: bastidores filmados</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ===== EQUIPE ===== -->
+    <div class="section" id="equipe">
+        <div class="section-label fade-in">Quem Faz Acontecer</div>
+        <h2 class="section-title fade-in">Equipe</h2>
+        <p class="section-desc fade-in">Estrutura enxuta e multidisciplinar com liderança estratégica e execução
+            integrada.</p>
+        <div class="grid-2 fade-in" style="margin-bottom: 50px;">
+            <div class="card"
+                style="text-align: center; background: linear-gradient(135deg, rgba(197, 160, 89, 0.08) 0%, transparent 100%);">
+                <div class="team-avatar" style="width: 90px; height: 90px; font-size: 2.5rem; margin: 0 auto 20px;">🏛️
+                </div>
+                <h3 style="font-size: 1.5rem;">Ibrahim Boufleur</h3>
+                <div
+                    style="color: var(--accent-gold); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 16px;">
+                    Visionário & Estrategista</div>
+                <p>Visão master, estratégia de Equity/Exit. Mentor principal do The Catalyst. O "CEO Catalisador" —
+                    inspira a transformação sem se consumir.</p>
+            </div>
+            <div class="card"
+                style="text-align: center; background: linear-gradient(135deg, rgba(197, 160, 89, 0.08) 0%, transparent 100%);">
+                <div class="team-avatar" style="width: 90px; height: 90px; font-size: 2.5rem; margin: 0 auto 20px;">⚔️
+                </div>
+                <h3 style="font-size: 1.5rem;">Luiz Portal</h3>
+                <div
+                    style="color: var(--accent-gold); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 16px;">
+                    Liderança Antifrágil</div>
+                <p>Estratégia executiva, cultura organizacional. Experiência em reestruturação empresarial e governança
+                    corporativa. O elemento Fogo.</p>
+            </div>
+        </div>
+        <div class="grid-4 fade-in">
+            <div class="team-card card">
+                <div class="team-avatar">💻</div>
+                <h4>Cléber Donato</h4>
+                <div class="role">Head de Tecnologia</div>
+                <p style="margin-top: 8px; font-size: 0.82rem; color: var(--text-secondary);">Infraestrutura digital,
+                    IA, automações e AIOS Core</p>
+            </div>
+            <div class="team-card card">
+                <div class="team-avatar">📊</div>
+                <h4>Ana Dias</h4>
+                <div class="role">Produção & Adm</div>
+                <p style="margin-top: 8px; font-size: 0.82rem; color: var(--text-secondary);">Gestão financeira,
+                    contratos e produção do evento</p>
+            </div>
+            <div class="team-card card">
+                <div class="team-avatar">🎪</div>
+                <h4>João Victor</h4>
+                <div class="role">Eventos & Logística</div>
+                <p style="margin-top: 8px; font-size: 0.82rem; color: var(--text-secondary);">Logística e entrega da
+                    Cúpula CEO</p>
+            </div>
+            <div class="team-card card">
+                <div class="team-avatar">📱</div>
+                <h4>Mariana</h4>
+                <div class="role">Comercial</div>
+                <p style="margin-top: 8px; font-size: 0.82rem; color: var(--text-secondary);">Vendas, fechamento de
+                    mentorias</p>
+            </div>
+        </div>
+        <div class="grid-4 fade-in" style="margin-top: 24px;">
+            <div class="team-card card">
+                <div class="team-avatar">🎨</div>
+                <h4>Bruno Lesche</h4>
+                <div class="role">Marketing</div>
+                <p style="margin-top: 8px; font-size: 0.82rem; color: var(--text-secondary);">Branding e comunicação
+                    estratégica</p>
+            </div>
+            <div class="team-card card">
+                <div class="team-avatar">📈</div>
+                <h4>Guilherme</h4>
+                <div class="role">Tráfego Pago</div>
+                <p style="margin-top: 8px; font-size: 0.82rem; color: var(--text-secondary);">Aquisição de leads
+                    qualificados</p>
+            </div>
+            <div class="team-card card">
+                <div class="team-avatar">📰</div>
+                <h4>Carol</h4>
+                <div class="role">Assessoria de Imprensa</div>
+                <p style="margin-top: 8px; font-size: 0.82rem; color: var(--text-secondary);">RP e amplificação de
+                    autoridade</p>
+            </div>
+            <div class="team-card card">
+                <div class="team-avatar">🤖</div>
+                <h4>Alex (IA)</h4>
+                <div class="role">Agente de CS</div>
+                <p style="margin-top: 8px; font-size: 0.82rem; color: var(--text-secondary);">Bot de acompanhamento do
+                    mentorado</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ===== TECNOLOGIA ===== -->
+    <div class="section">
+        <div class="section-label fade-in">Infraestrutura</div>
+        <h2 class="section-title fade-in">Tecnologia & IA</h2>
+        <div class="grid-3 fade-in">
+            <div class="card">
+                <div class="card-icon">🧠</div>
+                <h3>AIOS Core</h3>
+                <p>Sistema Operacional de IA com agentes especializados: RH, Diagnóstico, Gestão, Conselho — integrado
+                    ao ClickUp e Miro.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">💬</div>
+                <h3>Bot Alex (Telegram)</h3>
+                <p>CS com IA: acompanha o mentorado, coleta dados, orienta nas etapas dos 4 Elementos e gera
+                    diagnósticos automatizados.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🎤</div>
+                <h3>IA no Evento</h3>
+                <p>Processamento de áudios dos participantes via QR Code. Geração de diagnósticos personalizados
+                    entregues ao final do dia.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ===== CRONOGRAMA ===== -->
+    <div class="section" id="cronograma">
+        <div class="section-label fade-in">Macro Cronograma</div>
+        <h2 class="section-title fade-in">Roadmap até o Evento</h2>
+        <div class="grid-2 fade-in">
+            <div>
+                <div class="timeline">
+                    <div class="tl-item">
+                        <h4>Fev 2026 — Fundação</h4>
+                        <p>✅ Nome candidato aprovado internamente · CNPJ/Contabilidade · Setup ClickUp/AIOS · Abertura
+                            de contas · Registro INPI em andamento</p>
+                    </div>
+                    <div class="tl-item">
+                        <h4>Mar 2026 — Construção</h4>
+                        <p>Lives semanais · Bot Alex operacional · Landing Pages · Assessoria de imprensa · Início de
+                            tráfego pago</p>
+                    </div>
+                    <div class="tl-item">
+                        <h4>Abr 2026 — Aceleração</h4>
+                        <p>App de interação VIP · Staff · Kits do participante · Patrocínios formalizados · Vendas
+                            ativas</p>
+                    </div>
+                    <div class="tl-item">
+                        <h4>Mai 2026 — Execução</h4>
+                        <p>🏛️ <strong>CÚPULA CEO — THE CATALYST EXPERIENCE — 28/29 de Maio</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="card" style="margin-bottom: 20px;">
+                    <h3>Frentes Críticas</h3>
+                    <ul class="price-features">
+                        <li><strong>Naming:</strong> Em definição — validação INPI pendente</li>
+                        <li><strong>Local:</strong> WTC Goiânia — orçamento em validação</li>
+                        <li><strong>Tráfego:</strong> Contrato em fechamento</li>
+                        <li><strong>Conteúdo:</strong> Ibrahim gravando — roteiros em elaboração</li>
+                        <li><strong>Tech:</strong> CRM, Bot Alex e Landing Pages em dev</li>
+                        <li><strong>Marketing:</strong> Estratégia de transparência (reality show)</li>
+                    </ul>
+                </div>
+                <div class="card" style="background: rgba(197, 160, 89, 0.06);">
+                    <h3>Governança</h3>
+                    <ul class="price-features">
+                        <li><strong>Weekly:</strong> Feito / Prioridade / Preciso de ajuda</li>
+                        <li><strong>Fonte:</strong> ClickUp (verdade) + Miro (visual)</li>
+                        <li><strong>Regra:</strong> Tarefa não atualizada = tarefa atrasada</li>
+                        <li><strong>Huddle:</strong> 15-30min/semana de desbloqueio</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ===== VISÃO FUTURO ===== -->
+    <div class="section">
+        <div class="quote-block fade-in">
+            <blockquote>"O CEO comum gerencia processos. O CEO Catalisador acelera reações sem se consumir no processo."
+            </blockquote>
+            <cite>— Ibrahim Boufleur</cite>
+        </div>
+        <div class="grid-3 fade-in" style="margin-top: 40px;">
+            <div class="card">
+                <div class="card-icon">🌎</div>
+                <h3>Expansão Regional</h3>
+                <p>Começando por Goiânia, com plano de expansão para capitais e cidades polo do Centro-Oeste.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">📚</div>
+                <h3>Publicações</h3>
+                <p>"O Catalisador do CEO" (ebook/mídia) e "A Jornada do Padeiro" (livro físico) — extensões do
+                    ecossistema.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🤝</div>
+                <h3>Rede de Consultores</h3>
+                <p>Especialistas para entrega técnica pontual — consultoria setorial sob medida para os mentorados.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p style="margin-bottom: 8px;">© 2026 O Catalisador — Blueprint da Aceleração</p>
+        <p>Ibrahim Boufleur & Luiz Portal | Live Consultoria | Goiânia, GO</p>
+        <p style="margin-top: 12px;">₢ Powered by <a href="mailto:cleberdonato@ecossistemalive.com.br">Cléber Donato</a>
+        </p>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        const sections = document.querySelectorAll('[id]');
+        const navLinks = document.querySelectorAll('nav a');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(s => { if (scrollY >= s.offsetTop - 100) current = s.getAttribute('id'); });
+            navLinks.forEach(l => { l.classList.remove('active'); if (l.getAttribute('href') === '#' + current) l.classList.add('active'); });
+        });
+    </script>
+</body>
+
+</html>
